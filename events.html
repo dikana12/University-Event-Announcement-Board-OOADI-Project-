@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | University Event Announcement Board</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="Base Styles.css">
+    <link rel="stylesheet" href="events.css">
+</head>
+<body>
+    <!-- Navigation (same as index.html) -->
+    <nav class="navbar">
+        <!-- ... same navbar as index.html ... -->
+    </nav>
+
+    <!-- Events Page Content -->
+    <main class="events-page">
+        <div class="events-header">
+            <h1>University Events Board</h1>
+            <p>Browse all upcoming and past university events</p>
+        </div>
+
+        <div class="events-container">
+            <aside class="events-sidebar">
+                <h3>Filters</h3>
+                <form id="search-form" class="search-form">
+                    <input
+                        type="text"
+                        id="search-query"
+                        placeholder="Search events..."
+                    />
+                    <button type="submit" class="btn btn-sm">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                        <option value="academic">Academic</option>
+                        <option value="extracurricular">Extracurricular</option>
+                        <option value="sports">Sports</option>
+                        <option value="administrative">Administrative</option>
+                        <option value="social">Social</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Department</label>
+                    <select id="department-filter">
+                        <option value="">All Departments</option>
+                        <option value="science">Science</option>
+                        <option value="arts">Arts</option>
+                        <option value="engineering">Engineering</option>
+                        <option value="business">Business</option>
+                        <option value="medicine">Medicine</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Audience</label>
+                    <select id="audience-filter">
+                        <option value="">All Audiences</option>
+                        <option value="students">Students</option>
+                        <option value="faculty">Faculty</option>
+                        <option value="staff">Staff</option>
+                        <option value="parents">Parents</option>
+                        <option value="public">Public</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Start Date</label>
+                    <input type="date" id="start-date-filter">
+                </div>
+
+                <div class="filter-group">
+                    <label>End Date</label>
+                    <input type="date" id="end-date-filter">
+                </div>
+
+                <button id="clear-filters" class="btn btn-sm btn-outline">
+                    Clear Filters
+                </button>
+            </aside>
+
+            <main class="events-list">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading events...
+                </div>
+            </main>
+        </div>
+    </main>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="footer">
+        <!-- ... same footer as index.html ... -->
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="event.js"></script>
+</body>
+</html>
