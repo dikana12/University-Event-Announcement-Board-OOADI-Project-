@@ -142,7 +142,6 @@ function AppContent() {
             {user.role === 'admin' ? (
               <>
                 <Link to="/admin-dashboard">Dashboard</Link>
-                <Link to="/profile">Profile</Link>
                 <span style={{ flex: 1 }}></span>
               </>
             ) : (
@@ -150,23 +149,48 @@ function AppContent() {
                 <Link to="/events">Events</Link>
                 <Link to="/create-event">Create Event</Link>
                 <Link to="/notifications">Notifications</Link>
-                <Link to="/profile">Profile</Link>
                 <span style={{ flex: 1 }}></span>
               </>
             )}
             <div style={{ position: 'relative' }} ref={dropdownRef}>
-              <button onClick={() => setDropdownOpen(v => !v)} style={{ background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', padding: 0 }}>
-                <span style={{ width: 36, height: 36, borderRadius: '50%', background: '#e3e3e3', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#3949ab', fontSize: '1.2rem', overflow: 'hidden' }}>
-                  {user.avatar ? <img src={user.avatar} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : user.name.charAt(0)}
-                </span>
-                <span style={{ fontWeight: 600 }}>{user.name}</span>
-                <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="#3949ab" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </button>
+                              <button onClick={() => setDropdownOpen(v => !v)} style={{ background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', padding: 0 }}>
+                  <span 
+                    onClick={() => navigate('/profile')}
+                    style={{ 
+                      width: 36, 
+                      height: 36, 
+                      borderRadius: '50%', 
+                      background: '#e3e3e3', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      fontWeight: 700, 
+                      color: '#3949ab', 
+                      fontSize: '1.2rem', 
+                      overflow: 'hidden',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = 'scale(1.1)';
+                      e.target.style.boxShadow = '0 2px 8px rgba(57, 73, 171, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = 'scale(1)';
+                      e.target.style.boxShadow = 'none';
+                    }}
+                  >
+                    {user.avatar ? <img src={user.avatar} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : user.name.charAt(0)}
+                  </span>
+                  <span style={{ fontWeight: 600 }}>{user.name}</span>
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M5 8l5 5 5-5" stroke="#3949ab" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
               {dropdownOpen && (
                 <div style={{ position: 'absolute', right: 0, top: 40, background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', borderRadius: 8, minWidth: 180, zIndex: 10, padding: '0.5rem 0' }}>
                   <div style={{ padding: '0.5rem 1rem', fontWeight: 500 }}>{user.email}</div>
                   <div style={{ padding: '0.5rem 1rem', color: '#888' }}>{user.role} {user.department && <>• {user.department}</>}</div>
                   <hr style={{ margin: '0.5rem 0', border: 0, borderTop: '1px solid #eee' }} />
+                  <button onClick={() => navigate('/profile')} style={{ width: '100%', background: 'none', border: 'none', color: '#3949ab', fontWeight: 600, padding: '0.5rem 1rem', textAlign: 'left', cursor: 'pointer' }}>Profile</button>
                   <button onClick={handleLogout} style={{ width: '100%', background: 'none', border: 'none', color: '#e53935', fontWeight: 600, padding: '0.5rem 1rem', textAlign: 'left', cursor: 'pointer' }}>Logout</button>
                 </div>
               )}
