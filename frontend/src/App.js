@@ -138,13 +138,22 @@ function AppContent() {
             }}>Register</Link>
           </>
         ) : (
-                      <>
-              <Link to="/events">Events</Link>
-              <Link to="/create-event">Create Event</Link>
-              <Link to="/notifications">Notifications</Link>
-              <Link to="/profile">Profile</Link>
-              {user.role === 'admin' && <Link to="/admin-dashboard">Admin</Link>}
-              <span style={{ flex: 1 }}></span>
+          <>
+            {user.role === 'admin' ? (
+              <>
+                <Link to="/admin-dashboard">Dashboard</Link>
+                <Link to="/profile">Profile</Link>
+                <span style={{ flex: 1 }}></span>
+              </>
+            ) : (
+              <>
+                <Link to="/events">Events</Link>
+                <Link to="/create-event">Create Event</Link>
+                <Link to="/notifications">Notifications</Link>
+                <Link to="/profile">Profile</Link>
+                <span style={{ flex: 1 }}></span>
+              </>
+            )}
             <div style={{ position: 'relative' }} ref={dropdownRef}>
               <button onClick={() => setDropdownOpen(v => !v)} style={{ background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', padding: 0 }}>
                 <span style={{ width: 36, height: 36, borderRadius: '50%', background: '#e3e3e3', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#3949ab', fontSize: '1.2rem', overflow: 'hidden' }}>
@@ -166,16 +175,19 @@ function AppContent() {
         )}
       </nav>
       <Routes>
-        <Route path="/" element={!user ? <Home /> : <Dashboard />} />
+        <Route path="/" element={
+          !user ? <Home /> : 
+          user.role === 'admin' ? <AdminDashboard /> : <Dashboard />
+        } />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {user && <Route path="/events" element={<Events />} />}
-        {user && <Route path="/events/:id" element={<EventDetails />} />}
-        {user && <Route path="/create-event" element={<CreateEvent />} />}
-        {user && <Route path="/notifications" element={<Notifications />} />}
-        {user && <Route path="/profile" element={<Profile />} />}
+        {user && user.role !== 'admin' && <Route path="/events" element={<Events />} />}
+        {user && user.role !== 'admin' && <Route path="/events/:id" element={<EventDetails />} />}
+        {user && user.role !== 'admin' && <Route path="/create-event" element={<CreateEvent />} />}
+        {user && user.role !== 'admin' && <Route path="/notifications" element={<Notifications />} />}
+        {user && user.role !== 'admin' && <Route path="/profile" element={<Profile />} />}
         {user && user.role === 'admin' && <Route path="/admin-dashboard" element={<AdminDashboard />} />}
       </Routes>
     </div>
