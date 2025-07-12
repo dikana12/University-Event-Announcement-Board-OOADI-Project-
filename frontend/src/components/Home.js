@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const bgUrl = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80'; // Example Unsplash background
+const bgUrl = 'https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80'; // University students at campus event/meeting
 
 const accentYellow = '#ffd600';
 const deepBlue = '#2d3142';
@@ -11,7 +11,7 @@ const mint = '#3fc1c9';
 const Home = () => (
   <div style={{
     minHeight: '100vh',
-    background: `linear-gradient(120deg, rgba(34,40,49,0.82) 60%, ${mint} 100%), url(${bgUrl}) center/cover no-repeat`,
+    background: `linear-gradient(120deg, rgba(34,40,49,0.85) 60%, rgba(63,193,201,0.8) 100%), url(${bgUrl}) center/cover no-repeat`,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

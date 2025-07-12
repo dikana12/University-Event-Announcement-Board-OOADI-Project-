@@ -47,11 +47,93 @@ function AppContent() {
         </Link>
         {!user ? (
           <>
-            <Link to="/about">About Us</Link>
-            <Link to="/contact">Contact Us</Link>
+            <Link to="/about" style={{ 
+              textDecoration: 'none', 
+              color: '#3949ab', 
+              fontWeight: 600, 
+              padding: '0.6rem 1.2rem', 
+              borderRadius: '25px', 
+              border: '2px solid #3949ab', 
+              transition: 'all 0.3s ease',
+              backgroundColor: 'transparent',
+              fontSize: '0.9rem',
+              letterSpacing: '0.5px',
+              cursor: 'pointer'
+            }} onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#3949ab';
+              e.target.style.color = '#fff';
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 4px 12px rgba(57, 73, 171, 0.3)';
+            }} onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'transparent';
+              e.target.style.color = '#3949ab';
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}>About Us</Link>
+            <Link to="/contact" style={{ 
+              textDecoration: 'none', 
+              color: '#ef8354', 
+              fontWeight: 600, 
+              padding: '0.6rem 1.2rem', 
+              borderRadius: '25px', 
+              border: '2px solid #ef8354', 
+              transition: 'all 0.3s ease',
+              backgroundColor: 'transparent',
+              fontSize: '0.9rem',
+              letterSpacing: '0.5px',
+              cursor: 'pointer'
+            }} onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#ef8354';
+              e.target.style.color = '#fff';
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 4px 12px rgba(239, 131, 84, 0.3)';
+            }} onMouseLeave={(e) => {
+              e.target.style.backgroundColor = 'transparent';
+              e.target.style.color = '#ef8354';
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}>Contact Us</Link>
             <span style={{ flex: 1 }}></span>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/login" style={{ 
+              textDecoration: 'none', 
+              color: '#fff', 
+              fontWeight: 600, 
+              padding: '0.6rem 1.2rem', 
+              borderRadius: '25px', 
+              border: '2px solid #3949ab', 
+              backgroundColor: '#3949ab',
+              transition: 'all 0.3s ease',
+              fontSize: '0.9rem',
+              letterSpacing: '0.5px',
+              boxShadow: '0 2px 8px rgba(57, 73, 171, 0.3)',
+              cursor: 'pointer'
+            }} onMouseEnter={(e) => {
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 4px 16px rgba(57, 73, 171, 0.4)';
+            }} onMouseLeave={(e) => {
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = '0 2px 8px rgba(57, 73, 171, 0.3)';
+            }}>Login</Link>
+            <Link to="/register" style={{ 
+              textDecoration: 'none', 
+              color: '#fff', 
+              fontWeight: 600, 
+              padding: '0.6rem 1.2rem', 
+              borderRadius: '25px', 
+              border: '2px solid #ef8354', 
+              backgroundColor: '#ef8354',
+              transition: 'all 0.3s ease',
+              fontSize: '0.9rem',
+              letterSpacing: '0.5px',
+              boxShadow: '0 2px 8px rgba(239, 131, 84, 0.3)',
+              cursor: 'pointer'
+            }} onMouseEnter={(e) => {
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 4px 16px rgba(239, 131, 84, 0.4)';
+            }} onMouseLeave={(e) => {
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = '0 2px 8px rgba(239, 131, 84, 0.3)';
+            }}>Register</Link>
           </>
         ) : (
           <>
