@@ -56,6 +56,67 @@ const Profile = () => {
     );
   }
 
+  // Parent-specific profile
+  if (user.role === 'parent') {
+    return (
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #3fc1c9 0%, #ffd600 100%)', padding: '2rem' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto', background: 'rgba(255,255,255,0.97)', borderRadius: '20px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', padding: '2.5rem', textAlign: 'center' }}>
+          <div style={{ width: 100, height: 100, borderRadius: '50%', background: '#ef8354', color: '#fff', fontSize: 40, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
+            {user.name.charAt(0).toUpperCase()}
+          </div>
+          <h2 style={{ color: '#2d3142', fontWeight: 700 }}>{user.name}</h2>
+          <div style={{ color: '#888', marginBottom: 16 }}>{user.email}</div>
+          <div style={{ color: '#3949ab', fontWeight: 600, marginBottom: 24 }}>Parent</div>
+          <div style={{ textAlign: 'left', margin: '0 auto', maxWidth: 400 }}>
+            <h3 style={{ color: '#ef8354', marginBottom: 8 }}>Children (Sample)</h3>
+            <ul style={{ paddingLeft: 20, color: '#2d3142' }}>
+              <li>Jane Doe (Student, Computer Science)</li>
+              <li>John Doe (Student, Mathematics)</li>
+            </ul>
+          </div>
+          <div style={{ marginTop: 32, color: '#666', fontSize: 15 }}>
+            <b>Contact:</b> {profileData.phone} <br />
+            <b>Location:</b> {profileData.location}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Admin-specific profile
+  if (user.role === 'admin') {
+    return (
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', padding: '2rem' }}>
+        <div style={{ maxWidth: '700px', margin: '0 auto', background: 'rgba(255,255,255,0.97)', borderRadius: '20px', boxShadow: '0 8px 32px rgba(0,0,0,0.08)', padding: '2.5rem', textAlign: 'center' }}>
+          <div style={{ width: 100, height: 100, borderRadius: '50%', background: '#3949ab', color: '#fff', fontSize: 40, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
+            {user.name.charAt(0).toUpperCase()}
+          </div>
+          <h2 style={{ color: '#2d3142', fontWeight: 700 }}>{user.name}</h2>
+          <div style={{ color: '#888', marginBottom: 16 }}>{user.email}</div>
+          <div style={{ color: '#3949ab', fontWeight: 600, marginBottom: 24 }}>Administrator</div>
+          <div style={{ display: 'flex', justifyContent: 'space-around', margin: '2rem 0' }}>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 22, color: '#ef8354' }}>1247</div>
+              <div style={{ color: '#888', fontSize: 13 }}>Total Users</div>
+            </div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 22, color: '#3fc1c9' }}>89</div>
+              <div style={{ color: '#888', fontSize: 13 }}>Total Events</div>
+            </div>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 22, color: '#ffd600' }}>12</div>
+              <div style={{ color: '#888', fontSize: 13 }}>Departments</div>
+            </div>
+          </div>
+          <div style={{ marginTop: 32 }}>
+            <a href="/admin-dashboard" style={{ background: '#3949ab', color: '#fff', padding: '0.8rem 2rem', borderRadius: 20, textDecoration: 'none', fontWeight: 600, fontSize: 16, marginRight: 16 }}>Go to Admin Dashboard</a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Default: show the current profile for other roles
   return (
     <div style={{
       minHeight: '100vh',

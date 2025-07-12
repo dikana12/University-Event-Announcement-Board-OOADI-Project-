@@ -5,8 +5,18 @@ const AdminDashboard = () => {
   const { user } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedUser, setSelectedUser] = useState(null);
-
-  // Mock data for admin dashboard
+  const [recentUsers, setRecentUsers] = useState([
+    { id: 1, name: 'John Smith', email: 'john.smith@university.edu', role: 'student', department: 'Computer Science', status: 'active' },
+    { id: 2, name: 'Sarah Johnson', email: 'sarah.johnson@university.edu', role: 'teacher', department: 'Mathematics', status: 'active' },
+    { id: 3, name: 'Mike Davis', email: 'mike.davis@university.edu', role: 'student', department: 'Physics', status: 'pending' },
+    { id: 4, name: 'Emily Wilson', email: 'emily.wilson@university.edu', role: 'admin', department: 'Administration', status: 'active' }
+  ]);
+  const [recentEvents, setRecentEvents] = useState([
+    { id: 1, title: 'Spring Festival 2024', organizer: 'Student Council', department: 'Student Affairs', status: 'approved', attendees: 156 },
+    { id: 2, title: 'Career Fair', organizer: 'Career Services', department: 'Student Affairs', status: 'pending', attendees: 89 },
+    { id: 3, title: 'Research Symposium', organizer: 'Physics Department', department: 'Physics', status: 'approved', attendees: 234 },
+    { id: 4, title: 'Alumni Meet', organizer: 'Alumni Association', department: 'External Relations', status: 'pending', attendees: 67 }
+  ]);
   const stats = {
     totalUsers: 1247,
     totalEvents: 89,
@@ -15,26 +25,25 @@ const AdminDashboard = () => {
     totalDepartments: 12,
     systemHealth: 'Excellent'
   };
-
-  const recentUsers = [
-    { id: 1, name: 'John Smith', email: 'john.smith@university.edu', role: 'student', department: 'Computer Science', status: 'active' },
-    { id: 2, name: 'Sarah Johnson', email: 'sarah.johnson@university.edu', role: 'teacher', department: 'Mathematics', status: 'active' },
-    { id: 3, name: 'Mike Davis', email: 'mike.davis@university.edu', role: 'student', department: 'Physics', status: 'pending' },
-    { id: 4, name: 'Emily Wilson', email: 'emily.wilson@university.edu', role: 'admin', department: 'Administration', status: 'active' }
-  ];
-
-  const recentEvents = [
-    { id: 1, title: 'Spring Festival 2024', organizer: 'Student Council', department: 'Student Affairs', status: 'approved', attendees: 156 },
-    { id: 2, title: 'Career Fair', organizer: 'Career Services', department: 'Student Affairs', status: 'pending', attendees: 89 },
-    { id: 3, title: 'Research Symposium', organizer: 'Physics Department', department: 'Physics', status: 'approved', attendees: 234 },
-    { id: 4, title: 'Alumni Meet', organizer: 'Alumni Association', department: 'External Relations', status: 'pending', attendees: 67 }
-  ];
-
   const systemAlerts = [
     { id: 1, type: 'info', message: 'System backup completed successfully', time: '2 hours ago' },
     { id: 2, type: 'warning', message: 'High server load detected', time: '4 hours ago' },
     { id: 3, type: 'success', message: 'New user registration system deployed', time: '1 day ago' }
   ];
+
+  // Mock approve/decline/accept handlers
+  const handleApproveUser = (id) => {
+    setRecentUsers(users => users.map(u => u.id === id ? { ...u, status: 'active' } : u));
+  };
+  const handleDeclineUser = (id) => {
+    setRecentUsers(users => users.filter(u => u.id !== id));
+  };
+  const handleApproveEvent = (id) => {
+    setRecentEvents(events => events.map(e => e.id === id ? { ...e, status: 'approved' } : e));
+  };
+  const handleDeclineEvent = (id) => {
+    setRecentEvents(events => events.filter(e => e.id !== id));
+  };
 
   if (!user || user.role !== 'admin') {
     return (
@@ -219,6 +228,30 @@ const AdminDashboard = () => {
                         }}>
                           {user.status}
                         </div>
+                        {user.status === 'pending' && (
+                          <>
+                            <button onClick={() => handleApproveUser(user.id)} style={{
+                              background: '#27ae60',
+                              color: 'white',
+                              border: 'none',
+                              padding: '0.5rem 1rem',
+                              borderRadius: '15px',
+                              cursor: 'pointer',
+                              fontSize: '0.8rem',
+                              marginLeft: '0.5rem'
+                            }}>Accept</button>
+                            <button onClick={() => handleDeclineUser(user.id)} style={{
+                              background: '#e74c3c',
+                              color: 'white',
+                              border: 'none',
+                              padding: '0.5rem 1rem',
+                              borderRadius: '15px',
+                              cursor: 'pointer',
+                              fontSize: '0.8rem',
+                              marginLeft: '0.5rem'
+                            }}>Decline</button>
+                          </>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -258,6 +291,30 @@ const AdminDashboard = () => {
                         }}>
                           {event.status}
                         </div>
+                        {event.status === 'pending' && (
+                          <>
+                            <button onClick={() => handleApproveEvent(event.id)} style={{
+                              background: '#27ae60',
+                              color: 'white',
+                              border: 'none',
+                              padding: '0.5rem 1rem',
+                              borderRadius: '15px',
+                              cursor: 'pointer',
+                              fontSize: '0.8rem',
+                              marginLeft: '0.5rem'
+                            }}>Approve</button>
+                            <button onClick={() => handleDeclineEvent(event.id)} style={{
+                              background: '#e74c3c',
+                              color: 'white',
+                              border: 'none',
+                              padding: '0.5rem 1rem',
+                              borderRadius: '15px',
+                              cursor: 'pointer',
+                              fontSize: '0.8rem',
+                              marginLeft: '0.5rem'
+                            }}>Decline</button>
+                          </>
+                        )}
                       </div>
                     ))}
                   </div>
