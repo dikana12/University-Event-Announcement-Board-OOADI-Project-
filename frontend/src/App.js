@@ -10,6 +10,8 @@ import Register from './components/Register';
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
+import Profile from './components/Profile';
+import AdminDashboard from './components/AdminDashboard';
 import { AuthContext } from './context/AuthContext';
 
 function AppContent() {
@@ -136,11 +138,13 @@ function AppContent() {
             }}>Register</Link>
           </>
         ) : (
-          <>
-            <Link to="/events">Events</Link>
-            <Link to="/create-event">Create Event</Link>
-            <Link to="/notifications">Notifications</Link>
-            <span style={{ flex: 1 }}></span>
+                      <>
+              <Link to="/events">Events</Link>
+              <Link to="/create-event">Create Event</Link>
+              <Link to="/notifications">Notifications</Link>
+              <Link to="/profile">Profile</Link>
+              {user.role === 'admin' && <Link to="/admin-dashboard">Admin</Link>}
+              <span style={{ flex: 1 }}></span>
             <div style={{ position: 'relative' }} ref={dropdownRef}>
               <button onClick={() => setDropdownOpen(v => !v)} style={{ background: 'none', border: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', padding: 0 }}>
                 <span style={{ width: 36, height: 36, borderRadius: '50%', background: '#e3e3e3', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: '#3949ab', fontSize: '1.2rem', overflow: 'hidden' }}>
@@ -171,6 +175,8 @@ function AppContent() {
         {user && <Route path="/events/:id" element={<EventDetails />} />}
         {user && <Route path="/create-event" element={<CreateEvent />} />}
         {user && <Route path="/notifications" element={<Notifications />} />}
+        {user && <Route path="/profile" element={<Profile />} />}
+        {user && user.role === 'admin' && <Route path="/admin-dashboard" element={<AdminDashboard />} />}
       </Routes>
     </div>
   );
